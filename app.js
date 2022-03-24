@@ -5,17 +5,17 @@
       }
 
       addItem(link, title, desc){
-        var a = document.createElement('a');
+        let a = document.createElement('a');
 
         a.setAttribute('class', 'collection-item z-depth-1');
         a.setAttribute('href', link);
         a.setAttribute('target', '_blank');
 
-        var span = document.createElement('span');
+        let span = document.createElement('span');
         span.appendChild(document.createTextNode(title));
         span.setAttribute('class', 'defWord');
 
-        var p = document.createElement('p');
+        let p = document.createElement('p');
         p.appendChild(document.createTextNode(desc));
         p.setAttribute('class', 'defText');
 
@@ -78,7 +78,7 @@
         this.payload['gsrsearch'] = keyword;
         this.payload['gsrnamespace'] = '0';
         this.payload['gsrlimit'] = maxResults < 500 ? maxResults : 500;
-        var exlimit = maxResults < 20 ? maxResults : 20;
+        let exlimit = maxResults < 20 ? maxResults : 20;
         this.payload['exlimit'] = exlimit;
 
         this.validRequest = true;
@@ -95,7 +95,7 @@
         this.payload['grnnamespace'] = '0';
         this.payload['grnfilterredir'] = 'nonredirects';
         this.payload['grnlimit'] = maxResults < 500 ? maxResults : 500;
-        var exlimit = maxResults < 20 ? maxResults : 20;
+        let exlimit = maxResults < 20 ? maxResults : 20;
         this.payload['exlimit'] = exlimit;
 
         this.validRequest = true;
@@ -109,10 +109,10 @@
           return null;
         }
 
-        var queryPart = "";
-        var appendAmpersand = false;
+        let queryPart = "";
+        let appendAmpersand = false;
 
-        for(var i in this.payload){
+        for(let i in this.payload){
           if(this.payload[i] == ""){
             continue;
           }
@@ -125,7 +125,7 @@
           queryPart += i + "=" + this.payload[i];
         }
 
-        var GETRequest = this.endpoint + "?" + queryPart;
+        let GETRequest = this.endpoint + "?" + queryPart;
         return GETRequest;
       }
     }
@@ -134,7 +134,7 @@
 
       constructor(reqURL, userAgent){
         this.reqURL = reqURL;
-        var defUserAgent = {
+        let defUserAgent = {
           'header' : 'Api-User-Agent',
           'value':'chromian777 freecodecamp/v0.1'
         };
@@ -142,24 +142,24 @@
       }
 
       reqListener() {
-        var response = this.responseText;
-        var searchResult = JSON.parse(response);
+        let response = this.responseText;
+        let searchResult = JSON.parse(response);
         //console.log(JSON.parse(response));
 
         if(searchResult.length === undefined){
-          var searchResultContainer = document.getElementById('searchResult-container');
+          let searchResultContainer = document.getElementById('searchResult-container');
 
           while(searchResultContainer.hasChildNodes()){
             searchResultContainer.removeChild(searchResultContainer.firstChild);
           }
         }
 
-        //var keyword = searchResult[0];
-        var results = {};
+        //let keyword = searchResult[0];
+        let results = {};
 
           try{
-            var count = 0;
-            for(var i in searchResult['query']['pages']){
+            let count = 0;
+            for(let i in searchResult['query']['pages']){
               results[count++] = {
                 "title" : searchResult['query']['pages'][i]['title'],
                 "desc" : searchResult['query']['pages'][i]['extract'],
@@ -173,7 +173,7 @@
               document.getElementById('progressBar').style = 'visibility : hidden;';
 
               //clear previous results, if any
-              var searchResultContainer = document.getElementById('searchResult-container');
+              let searchResultContainer = document.getElementById('searchResult-container');
               while(searchResultContainer.hasChildNodes()){
                   searchResultContainer.removeChild(searchResultContainer.firstChild);
               }
@@ -184,19 +184,19 @@
               return false;
           }
 
-        var collection = new Collection();
+        let collection = new Collection();
 
-        for(var i in results){
-          var title = results[i]['title'];
-          var desc = results[i]['desc'];
-          var link = results[i]['link'];
+        for(let i in results){
+          let title = results[i]['title'];
+          let desc = results[i]['desc'];
+          let link = results[i]['link'];
 
           collection.addItem(link, title, desc);
         }
 
-        var collectionNode = collection.getCollectionElement();
+        let collectionNode = collection.getCollectionElement();
 
-        var searchResultContainer = document.getElementById('searchResult-container');
+        let searchResultContainer = document.getElementById('searchResult-container');
 
         while(searchResultContainer.hasChildNodes()){
           searchResultContainer.removeChild(searchResultContainer.firstChild);
@@ -212,11 +212,11 @@
       }
 
       get(){
-          var progessBar = document.getElementById('progressBar');
+          let progessBar = document.getElementById('progressBar');
           if(progessBar.style != 'visibility : visible;'){
               progessBar.style = 'visibility : visible;';
           }
-          var oReq = new XMLHttpRequest();
+          let oReq = new XMLHttpRequest();
           oReq.addEventListener("load", this.reqListener);
           oReq.open("GET", this.reqURL);
           oReq.setRequestHeader(this.userAgent['header'], this.userAgent['value'] );
@@ -225,16 +225,16 @@
     }
 
     function liftSearchDiv(){
-      var searchBox = document.getElementById('searchDiv');
-      var tween = TweenLite.to(searchBox, 1, {top:"0px", ease:Strong.easeInOut});
+      let searchBox = document.getElementById('searchDiv');
+      let tween = TweenLite.to(searchBox, 1, {top:"0px", ease:Strong.easeInOut});
       tween.play();
     }
 
 
-    var inputTimeOut = null;
-    var firstSearch = true;
+    let inputTimeOut = null;
+    let firstSearch = true;
     function getSR_Input(obj){
-      var searchWord = obj.target.value;
+      let searchWord = obj.target.value;
       if(firstSearch){
         liftSearchDiv();
         firstSearch = false;
@@ -246,24 +246,24 @@
 
       function setSR_Button(){
           clearTimeout(inputTimeOut);
-          var searchWord = document.getElementById('searchWord').value;
+          let searchWord = document.getElementById('searchWord').value;
           getSearchResults(searchWord);
       }
 
       function getSearchResults(searchWord){
           inputTimeOut = setTimeout(function () {
               if(searchWord !== undefined && searchWord !== "" && searchWord !== " "){
-                var wr = new WikiReq();
+                let wr = new WikiReq();
                 if(wr.search(searchWord, 10)){
                   wrURL = wr.buildGETRequest();
-                  var gwr = new GetWikiResults(wrURL);
+                  let gwr = new GetWikiResults(wrURL);
                   gwr.get();
                   document.getElementById('infoTextDiv').style = "visibility: hidden;";
                   document.getElementById('infoText').innerHTML = "search for : " + searchWord;
                 }
               }
               else{
-                var searchResultContainer = document.getElementById('searchResult-container');
+                let searchResultContainer = document.getElementById('searchResult-container');
                 while(searchResultContainer.hasChildNodes()){
                 searchResultContainer.removeChild(searchResultContainer.firstChild);
                 }
@@ -277,10 +277,10 @@
           liftSearchDiv();
           firstSearch = false;
         }
-        var wr = new WikiReq();
+        let wr = new WikiReq();
         if(wr.random(5)){
           wrURL = wr.buildGETRequest();
-          var gwr = new GetWikiResults(wrURL);
+          let gwr = new GetWikiResults(wrURL);
           gwr.get();
 
           document.getElementById('infoTextDiv').style = "visibility: hidden;";
@@ -290,7 +290,7 @@
       }
 
     //get search word as it's typed in
-    var searchWordNode = document.getElementById('searchWord');
+    let searchWordNode = document.getElementById('searchWord');
     searchWordNode.value = "";
     searchWordNode.addEventListener('input', getSR_Input);
 
