@@ -1,38 +1,46 @@
-<!doctype html>
+<!DOCTYPE html>
 
 <html lang="en">
-<head>
-  <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
 
-  <title>Wiki Search</title>
-  <meta name="description" content="Wiki Search">
-  <meta name="author" content="Brown">
+    <title>Wiki Search</title>
+    <meta name="description" content="Wiki Search" />
+    <meta name="author" content="Brown" />
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css" integrity="sha256-XoaMnoYC5TH6/+ihMEnospgm0J1PM/nioxbOUdnM8HY=" crossorigin="anonymous">
-  <link rel="stylesheet" href="styles.css">
-</head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css"
+      integrity="sha256-XoaMnoYC5TH6/+ihMEnospgm0J1PM/nioxbOUdnM8HY="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-<body>
-<header>
-  <nav>
-    <div class="nav-wrapper cyan darken-3">
-      <a href="#" class="brand-logo">Wiki Search</a>
+  <body>
+    <header>
+      <nav>
+        <div class="nav-wrapper cyan darken-3">
+          <a href="#" class="brand-logo">Wiki Search</a>
+        </div>
+      </nav>
+    </header>
+
+    <div id="progressBar">
+      <div class="progress">
+        <div class="indeterminate"></div>
+      </div>
     </div>
-  </nav>
-</header>
 
-<div id="progressBar">
-  <div class="progress">
-    <div class="indeterminate"></div>
-  </div>
-</div>
-
-<main>
-  <div class="container z-depth-1" id="searchDiv">
-    <div class="searchbar blue-grey darken-3">
+    <main>
+      <div class="container z-depth-1" id="searchDiv">
+        <div class="searchbar blue-grey darken-3">
           <div class="input-field item col s6" id="search-container">
-            <input id="searchWord" type="text" class="white-text" autofocus>
+            <input id="searchWord" type="text" class="white-text" autofocus />
             <label for="searchWord">type here to search</label>
           </div>
           <a class="waves-effect waves-teal item button-custom" id="searchBtn">
@@ -41,17 +49,17 @@
           <a class="waves-effect waves-teal item button-custom" id="randomBtn">
             <i class="fa fa-random" aria-hidden="true"></i>
           </a>
-    </div>
-  </div>
-  <div class="container" id="infoTextDiv">
-    <p id="infoText">search for : "LOST"</p>
-  </div>
-  <div class="container">
-    <div id='searchResult-container' class="container"></div>
-  </div>
-</main>
+        </div>
+      </div>
+      <div class="container" id="infoTextDiv">
+        <p id="infoText">search for : "LOST"</p>
+      </div>
+      <div class="container">
+        <div id="searchResult-container" class="container"></div>
+      </div>
+    </main>
 
-<!--
+    <!--
 <footer class="page-footer cyan darken-3">
   <div class="footer-copyright">
     <div class="container">
@@ -61,10 +69,10 @@
 </footer>
 -->
 
-  <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
 
-  <script src="app.js"></script>
-</body>
+    <script src="app.js"></script>
+  </body>
 </html>
